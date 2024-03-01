@@ -86,3 +86,17 @@ FROM
 	GROUP BY 1, 2) AS cooic
 GROUP BY 1
 ORDER BY 1;
+
+--Revenue for each year from each city for the three states, using pivot tables:
+SELECT city, state, 
+COALESCE(SUM(CASE WHEN year = '2016' THEN revenue END), 0) AS revenue_2016,
+COALESCE(SUM(CASE WHEN year = '2017' THEN revenue END), 0) AS revenue_2017,
+COALESCE(SUM(CASE WHEN year = '2018' THEN revenue END), 0) AS revenue_2018
+FROM
+	(SELECT c.city, c.state, TO_CHAR(co.order_date::DATE,'yyyy') AS year, 
+		ROUND(SUM(oi.quantity*oi.selling_price)::NUMERIC) AS revenue FROM completed_orders AS co
+	INNER JOIN order_items AS oi USING(order_id)
+	INNER JOIN customers AS c USING(customer_id)
+	GROUP BY 1, 2, 3) cooic
+GROUP BY 1, 2
+ORDER BY 2, 1;
