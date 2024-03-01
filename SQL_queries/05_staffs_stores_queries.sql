@@ -111,3 +111,33 @@ INNER JOIN customers AS c USING(customer_id)
 INNER JOIN stores AS s USING(store_id)
 WHERE staff_sales_rank<=5
 ORDER BY 1 DESC, 14;--All top transactions are for the NY store, with customers from NY as well.
+
+--Finding yearly revenue for each store, using pivot tables:
+SELECT store_id, store_name,
+SUM(CASE WHEN year = '2016' THEN revenue END) AS revenue_2016,
+SUM(CASE WHEN year = '2017' THEN revenue END) AS revenue_2017,
+SUM(CASE WHEN year = '2018' THEN revenue END) AS revenue_2018
+FROM 
+	(SELECT co.store_id, s.store_name, TO_CHAR(co.order_date::DATE,'yyyy') AS year, 
+	 ROUND(SUM(oi.selling_price)::NUMERIC) AS revenue
+	FROM completed_orders AS co
+	INNER JOIN order_items AS oi USING(order_id)
+	INNER JOIN stores As s USING(store_id)
+	GROUP BY 1, 2, 3) AS coois
+GROUP BY 1,2
+ORDER BY 1;
+
+--Finding yearly revenue by each salesperson using pivot tables:
+SELECT staff_id, first_name, last_name,  
+SUM(CASE WHEN year = '2016' THEN revenue END) AS revenue_2016,
+SUM(CASE WHEN year = '2017' THEN revenue END) AS revenue_2017,
+SUM(CASE WHEN year = '2018' THEN revenue END) AS revenue_2018
+FROM 
+	(SELECT co.staff_id, s.first_name,  s.last_name, 
+	 TO_CHAR(co.order_date::DATE,'yyyy') AS year, ROUND(SUM(oi.selling_price)::NUMERIC) AS revenue
+	FROM completed_orders AS co
+	INNER JOIN order_items AS oi USING(order_id)
+	INNER JOIN staffs As s USING(staff_id)
+	GROUP BY 1, 2, 3, 4) AS coois
+GROUP BY 1, 2, 3
+ORDER BY 1;

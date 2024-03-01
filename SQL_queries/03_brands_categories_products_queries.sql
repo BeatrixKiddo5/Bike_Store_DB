@@ -111,3 +111,59 @@ SELECT * FROM
 WHERE pdt_sales_rank<=3
 ORDER BY 1 DESC, 9;--All the products belong to brand_id 9. The category for top selling product for each year is different.
 
+--Total number of bikes launched every year by a brand, using pivot tables:
+SELECT brand_id, brand_name,
+COALESCE(SUM(CASE WHEN model_year = '2016' THEN count END), 0) AS n_pdt_2016,
+COALESCE(SUM(CASE WHEN model_year = '2017'THEN count END), 0) AS n_pdt_2017,
+COALESCE(SUM(CASE WHEN model_year = '2018'THEN count END), 0) AS n_pdt_2018 
+FROM
+	(SELECT p.brand_id, b.brand_name, model_year, COUNT(*)FROM products AS p
+	INNER JOIN brands AS b USING(brand_id)
+	GROUP BY 1, 2, 3) AS pb
+GROUP BY 1, 2
+ORDER BY 1;
+
+--Finding yearly revenue for each brand using pivot tables:
+SELECT brand_id, brand_name, 
+COALESCE(SUM(CASE WHEN year = '2016' THEN revenue END),0) AS revenue_2016,
+COALESCE(SUM(CASE WHEN year = '2017' THEN revenue END),0) AS revenue_2017,
+COALESCE(SUM(CASE WHEN year = '2018' THEN revenue END),0) AS revenue_2018
+FROM 
+	(SELECT b.brand_id, b.brand_name, TO_CHAR(co.order_date::DATE,'yyyy') AS year, 
+		ROUND(SUM(oi.selling_price*oi.quantity)::NUMERIC, 2) AS revenue FROM completed_orders AS co
+	INNER JOIN order_items AS oi USING(order_id)
+	INNER JOIN products AS p USING(product_id)
+	INNER JOIN brands AS b USING(brand_id)
+	GROUP BY 1, 2, 3) AS cooipb
+GROUP BY 1, 2
+ORDER BY 1;
+
+--Finding yearly revenue for each product using pivot tables:
+SELECT product_id, product_name, brand_name,
+COALESCE(SUM(CASE WHEN year = '2016' THEN revenue END), 0) AS revenue_2016,
+COALESCE(SUM(CASE WHEN year = '2017' THEN revenue END),0) AS revenue_2017,
+COALESCE(SUM(CASE WHEN year = '2018' THEN revenue END),0) AS revenue_2018
+FROM
+	(SELECT oi.product_id, p.product_name, b.brand_name, TO_CHAR(co.order_date::DATE,'yyyy') AS year,
+		ROUND(SUM(oi.selling_price*oi.quantity)::NUMERIC, 2) AS revenue FROM completed_orders AS co
+	INNER JOIN order_items AS oi USING(order_id)
+	INNER JOIN products AS p USING(product_id)
+	INNER JOIN brands AS b USING(brand_id)
+	GROUP BY 1, 2, 3, 4) AS cooipb
+GROUP BY 1, 2, 3
+ORDER BY 1;
+
+--Finding yearly revenue for each category using pivot tables:
+SELECT category_id, category_name,
+COALESCE(SUM(CASE WHEN year = '2016' THEN revenue END),0) AS revenue_2016,
+COALESCE(SUM(CASE WHEN year = '2017' THEN revenue END), 0) AS revenue_2017,
+COALESCE(SUM(CASE WHEN year = '2018' THEN revenue END), 0) AS revenue_2018
+FROM
+	(SELECT p.category_id, c.category_name, TO_CHAR(co.order_date::DATE,'yyyy') AS year,
+		ROUND(SUM(oi.quantity*oi.selling_price)::NUMERIC, 2) AS revenue FROM completed_orders AS co
+	INNER JOIN order_items AS oi USING(order_id)
+	INNER JOIN products AS p USING(product_id)
+	INNER JOIN categories AS c USING(category_id)
+	GROUP BY 1, 2, 3) AS cooipc
+GROUP BY 1, 2
+ORDER BY 1;
