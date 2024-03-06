@@ -78,4 +78,9 @@ This repository contains two folders: **Files(csv)** and **SQL_queries**. **File
   <img src="https://github.com/BeatrixKiddo5/Bike-Store-DB--PostgreSQL/assets/155089663/47ec73cf-bc44-4ddb-9beb-6f831fce6b88" width="850" height="600">
 
 
+- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Find the Sales dashboard using the above data, on Tableau Public
+https://public.tableau.com/app/profile/milin.chakraborty/viz/GoodOldSalesDashboard/Dashboard1
+<img src="https://github.com/BeatrixKiddo5/Bike-Store-DB--PostgreSQL/assets/155089663/07cc7786-c9ab-492c-89f9-91e92a241fbf" width="850" height="600">
 
