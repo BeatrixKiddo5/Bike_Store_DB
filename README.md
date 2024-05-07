@@ -1,7 +1,8 @@
 ### Bike Store Database- PostgreSQL Project
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-This repository contains two folders: **Files(csv)** and **SQL_queries**. **Files(csv)** contains all the csv files containing data for corresponding tables. **SQL_queries** contains queries to extract information from the tables.
-###List of tables:
+This repository contains two folders: **Files(csv)** and **SQL_queries**. **Files(csv)** contains all the csv files containing data for corresponding tables. **SQL_queries** contains queries to extract information from the tables. The file 'main.py' is used for loading the csv files into the PgSQL DataBase.
+
+###List of tables I have primarily worked with:
 1. **brands**: table to store information about different brand names of bikes.   
 - **columns**:
   - brand_id--> unique id for each brand name.
