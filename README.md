@@ -98,12 +98,12 @@ The **main.py** script contains the **csv_to_db_loader** class that has methods 
   - -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
   ### ERD Diagram for visualization of the relation among various features of the tables.
-  <img src="https://github.com/BeatrixKiddo5/Bike-Store-DB--PostgreSQL/assets/155089663/47ec73cf-bc44-4ddb-9beb-6f831fce6b88" width="850" height="600">
+  <img src="https://github.com/BeatrixKiddo5/Bike-Store-DB--PostgreSQL/assets/155089663/6ca43e66-5b7d-4cfa-96c1-562b6b9c7ad2" width="900" height="700">
 
 
 - --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-### Find the Sales dashboard using the above data, on Tableau Public
+### Find the Sales dashboard for understanding sales KPIs, on Tableau Public
 https://public.tableau.com/app/profile/milin.chakraborty/viz/GoodOldSalesDashboard/Dashboard1
-<img src="https://github.com/BeatrixKiddo5/Bike-Store-DB--PostgreSQL/assets/155089663/07cc7786-c9ab-492c-89f9-91e92a241fbf" width="850" height="600">
+<img src="https://github.com/BeatrixKiddo5/Bike-Store-DB--PostgreSQL/assets/155089663/07cc7786-c9ab-492c-89f9-91e92a241fbf" width="1000" height="750">
 
