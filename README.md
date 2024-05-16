@@ -1,8 +1,11 @@
 ### Bike Store Database- PostgreSQL Project
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-This repository contains two folders: **Files(csv)** and **SQL_queries**. **Files(csv)** contains all the csv files containing data for corresponding tables. **SQL_queries** contains queries to extract information from the tables. 
+This repository contains two folders: **Files(csv)** and **SQL_queries**. **Files(csv)** contains all the csv files containing data for corresponding tables. **SQL_queries** contains queries to extract information from the tables.  
+
 There are three python scripts: 
+
 The file **main.py** is used for loading the csv files into the PgSQL DataBase.
+
 Files **logger.py** is used for generating custom logs and **exception.py** is used for custom exception handling in main.
 
 ### List of tables I have primarily worked with:
