@@ -6,7 +6,7 @@ This repository contains two folders and three Python files:
 
 **SQL_queries** contains queries to extract information from the tables.  
 
-The file **main.py** is used for loading the CSV files into the PgSQL DataBase.
+The file **main.py** is used for loading the CSV files into the PgSQL DataBase, running on localhost.
 
 Files **logger.py** is used for generating custom logs and **exception.py** is used for custom exception handling in main.
 
